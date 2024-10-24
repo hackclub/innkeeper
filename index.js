@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const { metrics } = require('./utils/metrics')
 const Airtable = require('airtable');
 const base = new Airtable({ apiKey: process.env.AIRTABLE_PAT }).base('appTeNFYcUiYfGcR6');
-const prisma = new PrismaClient();
+const prisma = require("./utils/prismaExtends.js").prisma
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -46,13 +46,14 @@ setInterval(function(){
       })
     });
   })
-}, 1000)
+}, 1000*5)
 
 
 setInterval(async function () {
   const stages = await prisma.user.findMany({
     where: {},
   })
+  metrics.increment('events.pulse', 1)
   metrics.gauge('flow.users.starts.all_time', stages.length)
   for (let i = 1; i <= 6; i++) {
     metrics.gauge(`flow.users.stage.${i}`, stages.filter(stage => stage.stage == i).length);
@@ -82,5 +83,6 @@ setInterval(async function () {
   await require("./commands/quest.js")({ app, prisma });
 
   await app.start(process.env.PORT || 3000);
-  console.log("⚡️ Bolt app is running!");
+  metrics.increment('events.startup', 1)
+  console.log("🤵 Innkeeper is running");
 })();
