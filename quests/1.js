@@ -80,6 +80,15 @@ module.exports = async function ({ app, prisma, command, body, ack, respond }) {
                     },
                     "value": "she/they",
                     "action_id": "set_pronouns5"
+                }, {
+                    "type": "button",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "Any pronouns",
+                        "emoji": true
+                    },
+                    "value": "any pronouns",
+                    "action_id": "set_pronouns6"
                 }]
         }]
     })

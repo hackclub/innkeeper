@@ -3,22 +3,22 @@
  */
 const { metrics } = require('../utils/metrics')
 module.exports = async function ({ app, prisma }) {
-    async function setPronouns(id, text) {
+    const handleSetPronouns = async ({ ack, respond, body, action }) => {
+        await ack();
         metrics.increment('events.actions.run.set_pronouns', 1)
         await app.client.users.profile.set({
             profile: JSON.stringify({
-                pronouns: text
+                pronouns: action.text.text
             }),
-            user: id,
+            user: body.user.id,
             token: process.env.SLACK_USER_TOKEN
         })
+        await respond("✅ Set pronouns successfully");
+    };
+
+    for (let i = 1; i <= 6; i++) {
+        app.action(`set_pronouns${i}`, handleSetPronouns);
     }
-    // i hate slack block kit sm rn
-    app.action("set_pronouns1", async ({ ack, respond, body, action }) => { await ack(); await setPronouns(body.user.id, action.text.text); await respond("✅ Set pronouns successfully") })
-    app.action("set_pronouns2", async ({ ack, respond, body, action }) => { await ack(); await setPronouns(body.user.id, action.text.text); await respond("✅ Set pronouns successfully") })
-    app.action("set_pronouns3", async ({ ack, respond, body, action }) => { await ack(); await setPronouns(body.user.id, action.text.text); await respond("✅ Set pronouns successfully") })
-    app.action("set_pronouns4", async ({ ack, respond, body, action }) => { await ack(); await setPronouns(body.user.id, action.text.text); await respond("✅ Set pronouns successfully") })
-    app.action("set_pronouns5", async ({ ack, respond, body, action }) => { await ack(); await setPronouns(body.user.id, action.text.text); await respond("✅ Set pronouns successfully") })
     app.action("next_quest", async ({ ack, respond, say, body }) => {
         await ack();
         metrics.increment('events.buttons.run.next_quest', 1)
