@@ -4,6 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "type": "commonjs",
+  "scripts": {
+    "start": "node ."
+  },
   "dependencies": {
     "@prisma/client": "^5.21.1",
     "@slack/bolt": "^4.0.0",
