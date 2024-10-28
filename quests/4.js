@@ -32,7 +32,7 @@ module.exports = async function ({ app, prisma, command, body, ack, respond }) {
                     "type": "mrkdwn",
                     "text": `Now, you can join these interest group channels to ask for help and meet other people interested in stuff like you!
                     
-We've picked 10 random ones. Join one you might be interested in and run /quest from one of them!
+We've picked 10 random ones. Join one you might be interested in and run \`/quest\` from one of them!
                     
 ${await getRandomChannels()}
                     `

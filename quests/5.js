@@ -32,9 +32,23 @@ ${channels}`
                 "elements": [
                     {
                         "type": "mrkdwn",
-                        "text": "Quest 5 out of 6. This quest is optional so you can skip it. Run /quest for the next quest."
+                        "text": "Quest 5 out of 6. This quest is optional so you can skip it."
                     }
                 ]
+            },
+            {
+                "type": "actions",
+                "elements": [
+                    {
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": "Next Quest",
+                            "emoji": true
+                        },
+                        "value": "next_quest",
+                        "action_id": "next_quest"
+                    }]
             }
         ]
     })
