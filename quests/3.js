@@ -2,7 +2,6 @@
  * @param {{app: import('@slack/bolt').App, prisma: import('@prisma/client').PrismaClient}}} param1
  */
 module.exports = async function ({ app, prisma, command, body, ack, respond }) {
-    if (body?.channel_id !== "C078Q8PBD4G" || body?.channel?.id !== "C078Q8PBD4G") return await respond("Check <#C078Q8PBD4G> for the next quest!")
     await prisma.user.update({
         where: {
             id: body?.user_id || body?.user?.id
