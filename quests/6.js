@@ -1,6 +1,7 @@
 /**
  * @param {{app: import('@slack/bolt').App, prisma: import('@prisma/client').PrismaClient}}} param1
  */
+const { metrics } = require('../utils/metrics')
 module.exports = async function ({ app, prisma, command, body, ack, respond }) {
     metrics.increment('events.flow.finish', 1)
     await respond({
