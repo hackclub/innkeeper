@@ -2,6 +2,7 @@
  * @param {{app: import('@slack/bolt').App, prisma: import('@prisma/client').PrismaClient}}} param1
  */
 module.exports = async function ({ app, prisma, command, body, ack, respond }) {
+    await respond("Check <#C078Q8PBD4G> for the next quest!")
     await prisma.user.update({
         where: {
             id: body?.user_id || body?.user?.id
@@ -65,23 +66,9 @@ Example: /setuserlocation Atlanta, Georgia.` : (await sls.text())}`
                     "elements": [
                         {
                             "type": "mrkdwn",
-                            "text": "Quest 4 out of 7. Run /quest for the next quest, or click the button below:"
+                            "text": "Quest 4 out of 7. Run `/quest` to advance."
                         }
                     ]
-                },
-                {
-                    "type": "actions",
-                    "elements": [
-                        {
-                            "type": "button",
-                            "text": {
-                                "type": "plain_text",
-                                "text": "Next Quest",
-                                "emoji": true
-                            },
-                            "value": "next_quest",
-                            "action_id": "next_quest"
-                        }]
                 }
             ]
         })

@@ -46,7 +46,7 @@ ${await getRandomChannels()}
                 "elements": [
                     {
                         "type": "mrkdwn",
-                        "text": "Quest 5 out of 7"
+                        "text": "Quest 5 out of 7. Run `/quest` from one of the channels above to advance."
                     }
                 ]
             }

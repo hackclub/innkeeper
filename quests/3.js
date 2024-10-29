@@ -7,7 +7,7 @@ module.exports = async function ({ app, prisma, command, body, ack, respond }) {
             id: body?.user_id || body?.user?.id
         },
         data: {
-            stage: 3
+            stage: 4
         }
     })
     var events = await (await fetch("https://events.hackclub.com/api/events/upcoming/")).json()
@@ -53,23 +53,9 @@ module.exports = async function ({ app, prisma, command, body, ack, respond }) {
                 "elements": [
                     {
                         "type": "mrkdwn",
-                        "text": "Quest 3 out of 7. This quest is optional and you can skip it."
+                        "text": "Quest 3 out of 7. This quest is optional and you can skip it. Run `/quest` to advance."
                     }
                 ]
-            },
-            {
-                "type": "actions",
-                "elements": [
-                    {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Next Quest",
-                            "emoji": true
-                        },
-                        "value": "next_quest",
-                        "action_id": "next_quest"
-                    }]
             }
 
         ]
