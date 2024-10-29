@@ -81,6 +81,8 @@ setInterval(async function () {
 (async () => {
   await require("./commands/button.js")({ app, prisma });
   await require("./commands/quest.js")({ app, prisma });
+  await require("./commands/profile.js")({ app, prisma });
+
 
   await app.start(process.env.PORT || 3000);
   metrics.increment('events.startup', 1)

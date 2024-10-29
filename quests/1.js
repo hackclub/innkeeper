@@ -16,10 +16,7 @@ module.exports = async function ({ app, prisma, command, body, ack, respond }) {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": `Your first quest is to fill our your profile! You can set:
-- 👤 Your name (<https://slack.com/help/articles/216360827-Change-your-display-name|learn how to set that here>)
-- 🖼️ A photo, which doesn't have to be your face! (<https://slack.com/help/articles/115005506003-Upload-a-profile-photo|learn how to set that here>)
-- 🏀 What you like doing as a hobby (Only on PC, <https://cloud-80a3j2fh7-hack-club-bot.vercel.app/0image.png|learn how to set that here>)`
+                    "text": `Your first quest is to fill our your profile!\n\n<https://hackclub.slack.com/canvas/C07PPK84JUB|One of our wonderful community members, Felix Gao, made this simple guide> (<https://hackclub.slack.com/docs/T0266FRGM/F07Q7U8A335|use this one instead if you're on mobile>).`
                 }
             }
         ]
