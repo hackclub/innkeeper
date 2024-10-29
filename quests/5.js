@@ -1,27 +1,41 @@
 /**
  * @param {{app: import('@slack/bolt').App, prisma: import('@prisma/client').PrismaClient}}} param1
  */
-const { Gorse } = require("gorsejs")
-const client = new Gorse({ endpoint: process.env.GORSE_ENDPOINT, secret: process.env.GORSE_SECRET });
 module.exports = async function ({ app, prisma, command, body, ack, respond }) {
-    await prisma.user.update({
-        where: {
-            id: body?.user_id || body?.user?.id
-        },
-        data: {
-            stage: 6
+    const arr = await (await fetch(`https://l.hack.club/affinity`)).json()
+    if (arr.find(ch => ch.id == (body?.channel_id || body?.channel?.id))) {
+        await prisma.user.update({
+            where: {
+                id: body?.user_id || body?.user?.id
+            },
+            data: {
+                stage: 6
+            }
+        })
+        await require(`./6`)({ app, prisma, command, body, ack, respond });
+        return;
+    }
+    async function getRandomChannels() {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
         }
-    })
-    var channels = await client.getItemNeighbors({ itemId: body?.channel_id || body?.channel?.id })
-    channels = channels.map(rec => `- <#${rec.Id}>`).join("\n")
+
+        return arr.slice(0, 10).map(ch => `- ${ch.emoji} <#${ch.id}>`).join("\n").replaceAll(/[\u{1F3FB}-\u{1F3FF}]/gmu, "")
+    }
+
     await respond({
         blocks: [
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": `Now, we encourage you to check out channels similar to this one :)
-${channels}`
+                    "text": `Now, you can join these interest group channels to ask for help and meet other people interested in stuff like you!
+                    
+We've picked 10 random ones. Join one you might be interested in and run \`/quest\` from one of them!
+                    
+${await getRandomChannels()}
+                    `
                 }
             },
             {
@@ -32,23 +46,9 @@ ${channels}`
                 "elements": [
                     {
                         "type": "mrkdwn",
-                        "text": "Quest 5 out of 6. This quest is optional so you can skip it."
+                        "text": "Quest 5 out of 7"
                     }
                 ]
-            },
-            {
-                "type": "actions",
-                "elements": [
-                    {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Next Quest",
-                            "emoji": true
-                        },
-                        "value": "next_quest",
-                        "action_id": "next_quest"
-                    }]
             }
         ]
     })
