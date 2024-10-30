@@ -89,7 +89,7 @@ http.get('/heartbeat', (req, res) => {
 });
 
 http.listen(process.env.PORT || 3000, () => {
-  console.log(`Innkeeper HTTP listening on port ${port}`)
+  console.log(`Innkeeper HTTP listening on port ${process.env.PORT || 3000}`)
 });
 
 
