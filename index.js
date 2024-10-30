@@ -5,7 +5,6 @@ const newUsers = require('./utils/airtable.js');
 const prisma = require("./utils/prismaExtends.js").prisma
 const express = require('express')
 const http = express()
-const port = 3000
 
 
 const app = new App({
@@ -89,7 +88,7 @@ http.get('/heartbeat', (req, res) => {
   res.send("💓 boom boom")
 });
 
-http.listen(port, () => {
+http.listen(process.env.PORT || 3000, () => {
   console.log(`Innkeeper HTTP listening on port ${port}`)
 });
 
