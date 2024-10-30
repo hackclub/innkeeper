@@ -10,5 +10,3 @@ module.exports = async function poll() {
     })).json()
     return json.records
 }
-
-module.exports()

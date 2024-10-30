@@ -11,7 +11,7 @@ module.exports = async function ({ app, prisma, command, body, ack, respond }) {
         }
     })
     var events = await (await fetch("https://events.hackclub.com/api/events/upcoming/")).json()
-    events = events.filter(event => new Date(event.end) > new Date()).slice(0, 10)
+    events = events.filter(event => new Date(event.end) > new Date()).slice(0, 5)
     const user = (await app.client.users.info({
         user: body?.user_id || body?.user?.id
     })).user;
@@ -38,7 +38,7 @@ module.exports = async function ({ app, prisma, command, body, ack, respond }) {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": `Now, you can see upcoming events. You can attend them if you want and meet new people, but it's always optional. In the future, you can see more at https://events.hackclub.com. *NB!* the times have been converted to your timezone (\`${tz}\`)`
+                    "text": `Anything catch your eye? Here's a list of upcoming events happening in the Slack for High Seas! We'll have events of all kinds from workshops to fun hangout events. We'd love to see you at one, RSVP for your first event this week! (you can skip this quest if you're not interested in attending an event!). *NB!* the times have been converted to your timezone (\`${tz}\`)`
                 }
             },
             {

@@ -87,11 +87,11 @@ setInterval(async function () {
 
 http.get('/heartbeat', (req, res) => {
   res.send("💓 boom boom")
-})
+});
 
 http.listen(port, () => {
   console.log(`Innkeeper HTTP listening on port ${port}`)
-})
+});
 
 
 (async () => {
