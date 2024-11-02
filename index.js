@@ -97,6 +97,7 @@ http.listen(process.env.PORT || 3000, () => {
   await require("./commands/button.js")({ app, prisma });
   await require("./commands/quest.js")({ app, prisma });
   await require("./commands/profile.js")({ app, prisma });
+  await require("./commands/reset.js")({ app, prisma });
 
 
   await app.start(process.env.PORT || 3000);
