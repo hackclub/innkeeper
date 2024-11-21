@@ -11,7 +11,7 @@ module.exports = async function ({ app, prisma, command, body, ack, respond }) {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": `One last thing, you should set your <https://forms.fillout.com/t/dpjQEYgRa1us?id=${userId.toUpperCase()}|channel suggestion prefrences here>. You'll also be able to run \`/like\` on channels that you like, just like instagram (and get recommendations using \`/recommendations\`). Learn more in the <#C07SREWJ4DA> channel.
+                    "text": `One last thing, you should set your <https://forms.fillout.com/t/dpjQEYgRa1us?id=${userId.toUpperCase()}|channel suggestion preferences here>. You'll also be able to run \`/like\` on channels that you like, just like Instagram (and get recommendations using \`/recommendations\`). Learn more in the <#C07SREWJ4DA> channel.
 
 Congrats! You've done all of the quests.`
                 }
